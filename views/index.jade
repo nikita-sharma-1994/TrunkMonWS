@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title} [created by #{creator} (#{email}) ]
+  br
+  p The following services are currently active :
+  p /thresholds/countries [no parameters]
+  p /thresholds/divisions [no parameters]
+  p /violations/freshness [datetime : 'type = dateTime']

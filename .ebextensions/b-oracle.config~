@@ -1,0 +1,45 @@
+files:
+  "/opt/elasticbeanstalk/hooks/appdeploy/pre/22configure_oracle.sh":
+    mode: "000755"
+    owner: root
+    group: root
+    content: |
+      #!/usr/bin/env bash
+
+      set -xe
+
+      # This script is executed immediately after the application is unpacked
+      # in the staging directory. Before npm install and after a-oracle.config.
+
+      # Move to oracle client folder
+      cd /usr/lib/oracle/12.1/client64
+
+      # Delete existing copy (if exists)
+      if [[ -d "/usr/lib/oracle/12.1/client64/network" ]]
+        then rm -rf network 
+      fi
+
+      # Make folder to move .ora files in
+      mkdir network
+      cd network 
+      mkdir admin 
+
+       # Load environment dir
+      EB_APP_STAGING_DIR=$(/opt/elasticbeanstalk/bin/get-config  container -k app_staging_dir)
+
+      # move tnsnames.ora and sqlnet.ora to proper loc
+      cd $EB_APP_STAGING_DIR/.ebextensions/oracle
+      mv *.ora /usr/lib/oracle/12.1/client64/network/admin
+
+      # make files assecible
+      sudo chmod 755 /usr/lib/oracle
+      sudo chmod 755 /usr/lib/oracle/12.1/client64/network/admin
+      sudo chmod 664 /usr/lib/oracle/12.1/client64/network/admin/tnsnames.ora
+      sudo chmod 664 /usr/lib/oracle/12.1/client64/network/admin/sqlnet.ora
+
+      # append to /etc/hosts file
+      myip=$(hostname)
+      myip1=$(hostname -I)
+      sudo echo "127.0.0.1   localhost localhost.localdomain" $myip > /etc/hosts
+      sudo echo $myip1   "http://try-env.pdsyqmpcp3.us-east-1.elasticbeanstalk.com" >> /etc/hosts  
+      sudo echo "10.227.1.96   juggernaut.am.idtcorp.net" >> /etc/hosts
