@@ -2,11 +2,10 @@ var express = require('express');
 var oracledb = require('oracledb');
 var router = express.Router();
 
-//set oracledb format to get output in object format
-oracledb.outFormat = oracledb.OBJECT;
-
 // GET divisions
 router.get('/', function(req, res) {
+  //set oracledb format to get output in object format
+  oracledb.outFormat = oracledb.OBJECT;
   oracledb.getConnection(
     {user : "trunkmon_app",
      password : "trunkmon_app",

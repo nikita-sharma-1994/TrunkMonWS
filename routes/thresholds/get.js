@@ -2,11 +2,10 @@ var express = require('express');
 var oracledb = require('oracledb');
 var router = express.Router();
 
-//set oracledb format to get output in object format
-oracledb.outFormat = oracledb.OBJECT;
-
 // GET from THRESHOLDs 
 router.get('/', function(req, res) {
+  //set oracledb format to get output in object format
+  oracledb.outFormat = oracledb.OBJECT;
 
   //Process req parameters
   var countryNegative = false, countryStartsFrom = undefined, countryName = undefined, divisionName = undefined;

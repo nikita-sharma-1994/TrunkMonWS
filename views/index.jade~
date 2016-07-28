@@ -14,13 +14,29 @@ block content
   br
   p 3. /threshold/get
   p parameters: countryNegative (optional) , countryName(optional), countryStartsFrom (optional), and divisionName (optional)
-  p eg : 'put_url_here'/thresholds/get?divisionName=Gold,Silver&countryNegative=false&countryName=India
+  p e.g : 'put_url_here'/thresholds/get?divisionName=Gold,Silver&countryNegative=false&countryName=India
   br
   p 4. /thresholds/push
   p parameters: routing_location_id (required), division_code (required), interval_code (required), auto_min_attempts (optional), auto_ccr (optional), auto_aloc (optional), auto_memo (optional), rev_min_attempts (optional), rev_ccr (optional), rev_aloc (optional), and rev_memo (optional)
   p e.g : 'put_url_here'/thresholds/push?routing_location_id=65536&division_code=K&interval_code=P&auto_ccr=0.4
   br
-  p 5. /violations/freshness 
+  p 5. /thresholds/delete
+  p parameters: routing_location_id (required), division_code (required), interval_code (required)
+  p e.g : 'put_url_here'/thresholds/delete?routing_location_id=65536&interval_code=P&division_code=K
+  br
+  p 6. /violations/get
+  p parameters: date (required), hour (required), countryStartsFrom (optional), divisionName (optional), showAutoPulled (optional), showRevPulled (optional), showSaved (optional), showExcluded (optional), showMngdCtrsOnly (optional)
+  p e.g : 'put_url_here'/violations/get?
+  br 
+  p 7. /violations/pull
+  parameters: p_Division (required), p_Location (required), p_Clli (required), Attempts (required), Completed (required), Minutes (required), CCR (required), ALOC (required), User (required), p_TOD (required), p_TOD2CH (required), p_TOD_SCHEDULE (optional) 
+  p e.g : 'put_url_here'/violations/pull?
+  br
+  p 8. /violations/push
+  p parameters: p_Division (required), p_Location (required), p_Clli (required), Attempts (required), Completed (required), Minutes (required), CCR (required), ALOC (required), User (required), p_TOD (required), p_TOD_SCHEDULE (required), p_Type (required), p_Change (required)
+  p e.g : 'put_url_here'/violations/push?
+  br
+  p 9. /violations/freshness 
   p parameter: datetime (required)
-  p e.g : <url>/violations/freshness?datetime=15-JUN-2012 12:03:02
+  p e.g : 'put_url_here'/violations/freshness?datetime=15-JUN-2012 12:03:02
   

@@ -2,11 +2,11 @@ var express = require('express');
 var oracledb = require('oracledb');
 var router = express.Router();
 
-//set oracledb format to get output in array format
-oracledb.outFormat = oracledb.ARRAY;
-
 // Check freshness
 router.get('/', function(req, res) {
+  //set oracledb format to get output in array format
+  oracledb.outFormat = oracledb.ARRAY;
+
   if(typeof req.param('datetime')  === 'undefined' || typeof req.param('datetime')  === 'null'){
   res.status(500).json({error : "Missing Parameter : datetime"}); return;}
   oracledb.getConnection(
@@ -27,7 +27,7 @@ router.get('/', function(req, res) {
                  res.status(200).json({isFresh : "false", changeTime : result.rows[i]}); return;
               } 
             }
-            res.status(200).json({isFresh : "true"});  
+            res.status(200).json({isFresh : "true"}); 
        }); 
   }); 
 });

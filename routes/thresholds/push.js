@@ -2,11 +2,11 @@ var express = require('express');
 var oracledb = require('oracledb');
 var router = express.Router();
 
-//set oracledb format to get output in object format
-oracledb.outFormat = oracledb.OBJECT;
-
 // PUSH into THRESHOLDS
 router.get('/', function(req, res) {
+
+  //set oracledb format to get output in object format
+  oracledb.outFormat = oracledb.OBJECT;
 
   //Process req parameters
   var routing_location_id = undefined, division_code = undefined, interval_code = undefined;
@@ -38,7 +38,7 @@ router.get('/', function(req, res) {
     auto_ccr = req.param('auto_ccr');
   }
   if(typeof req.param('auto_memo') !== 'undefined' && typeof req.param('auto_memo') !== 'null'){
-    auto_memo =  req.param('auto_memo') ;
+    auto_memo = "'" + req.param('auto_memo') + "'";
   }
 
   if(typeof req.param('rev_min_attempts') !== 'undefined' && typeof req.param('rev_min_attempts') !== 'null'){
@@ -51,7 +51,7 @@ router.get('/', function(req, res) {
     rev_ccr = req.param('rev_ccr');
   }
   if(typeof req.param('rev_memo') !== 'undefined' && typeof req.param('rev_memo') !== 'null'){
-    rev_memo =  req.param('rev_memo') ;
+    rev_memo =  "'" + req.param('rev_memo') + "'";
   }
   
   //establish connection to Oracle DB 

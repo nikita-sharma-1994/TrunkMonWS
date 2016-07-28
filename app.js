@@ -12,8 +12,12 @@ var countries = require('./routes/thresholds/countries');
 var divisions = require('./routes/thresholds/divisions');
 var thresholds_get = require('./routes/thresholds/get');
 var thresholds_push = require('./routes/thresholds/push');
+var thresholds_delete = require('./routes/thresholds/delete');
 //services related to violations
 var freshness = require('./routes/violations/freshness');
+var violations_get = require('./routes/violations/get');
+var violations_pull = require('./routes/violations/pull');
+var violations_push = require('./routes/violations/push');
 
 var app = express();
 
@@ -35,8 +39,12 @@ app.use('/thresholds/countries',countries);
 app.use('/thresholds/divisions',divisions);
 app.use('/thresholds/get',thresholds_get);
 app.use('/thresholds/push',thresholds_push);
+app.use('/thresholds/delete',thresholds_delete);
 //url paths related to violations
 app.use('/violations/freshness',freshness);
+app.use('/violations/get',violations_get);
+app.use('/violations/pull',violations_pull);
+app.use('/violations/push',violations_push);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
